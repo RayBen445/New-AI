@@ -16,4 +16,9 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          git push --force https://ProfessorCEO:$HF_TOKEN@huggingface.co/spaces/ProfessorCEO/New-AI main
+          git config --global user.email "professor@coolshotsystems.com"
+          git config --global user.name "CoolShotSystem"
+          git remote add space https://professor:$HF_TOKEN@huggingface.co/spaces/ProfessorCEO/New-AI
+          
+          # This acts as a filter to push only the backend folder
+          git push --force space `git subtree split --prefix backend main`:main
